@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Select Role</h2>
+
+<button onclick="selectRole('student')">Student</button>
+<button onclick="selectRole('teacher')">Teacher</button>
+
+<script>
+function selectRole(role){
+  localStorage.setItem("role", role);
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

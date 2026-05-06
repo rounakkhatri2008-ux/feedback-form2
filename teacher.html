@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Teacher Dashboard</h2>
+
+<div id="data">Loading feedback...</div>
+
+<script>
+async function loadFeedback() {
+  try {
+    const res = await fetch("/feedback");
+
+    if (!res.ok) {
+      document.getElementById("data").innerHTML = "Server error";
+      return;
+    }
+
+    const data = await res.json();
+
+    if (!data || data.length === 0) {
+      document.getElementById("data").innerHTML = "No feedback yet";
+      return;
+    }
+
+    let html = "";
+
+    data.forEach((f, i) => {
+      html += `
+        <div style="border:1px solid black; margin:10px; padding:10px;">
+          <b>Feedback ${i + 1}</b><br>
+          ${f.message}<br>
+          <small>${f.time}</small>
+        </div>
+      `;
+    });
+
+    document.getElementById("data").innerHTML = html;
+
+  } catch (err) {
+    console.log(err);
+    document.getElementById("data").innerHTML =
+      "Error loading feedback (check server)";
+  }
+}
+
+loadFeedback();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Feedback Form</h2>
+
+<textarea id="msg" placeholder="Write your feedback"></textarea><br><br>
+
+<button onclick="submitFeedback()">Submit</button>
+
+<script>
+async function submitFeedback(){
+  const message = document.getElementById("msg").value;
+
+  await fetch("/feedback", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ message })
+  });
+
+  alert("Feedback submitted successfully");
+}
+</script>
+
+</body>
+</html>
